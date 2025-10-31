@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+/* svg path {
+    fill: currentColor;
+} */
+
+/* For filled icons only */
+.icon--fill path {
+    fill: currentColor;
+}
+
+/* For outline icons */
+.icon--outline path {
+    fill: none;
+    stroke: currentColor;
+}
+/* Custom checkbox styling to remove background on check */
+input[type="checkbox"]:checked {
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e"); /* Default check */
+  background-color: transparent !important; /* Force transparent background */
+  border-color: #FF7F42 !important; /* Ensure orange border */
+}
+
+/* Style the SVG checkmark itself (using Tailwind's primaryColor) */
+input[type="checkbox"].text-primaryColor:checked {
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%23FF7F42' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+}

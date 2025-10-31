@@ -8,7 +8,7 @@ import DropDown from "../../components/Dropdown";
 import TextareaField from "../../components/TextareaField";
 import ButtonComponent from "../../components/ButtonComponent";
 import InputField from "../../components/InputField";
-import CustomCheckbox from "../../components/CustomCheckBox"; 
+import CustomCheckbox from "../../components/CustomCheckBox";
 
 
 export default function StockTake() {
@@ -35,7 +35,7 @@ export default function StockTake() {
       currentlyAvailable: "",
     },
   ]);
-  
+
 
   const [selectedRowIds, setSelectedRowIds] = useState([]);
 
@@ -60,7 +60,7 @@ export default function StockTake() {
     // Create a new array
     const updatedRows = rows.map((row, i) => {
       if (i === index) {
-      
+
         return { ...row, [field]: value };
       }
       return row;
@@ -68,7 +68,7 @@ export default function StockTake() {
     setRows(updatedRows);
   };
 
-  
+
   const handleAddRow = () => {
     const newId = rows.length > 0 ? Math.max(...rows.map(r => r.id)) + 1 : 1;
     setRows([
@@ -97,7 +97,7 @@ export default function StockTake() {
     if (selectedRowIds.length === rows.length) {
       setSelectedRowIds([]);
     } else {
-      setSelectedRowIds(rows.map((row) => row.id)); 
+      setSelectedRowIds(rows.map((row) => row.id));
     }
   };
 
@@ -107,17 +107,17 @@ export default function StockTake() {
     setRows(rows.filter((row) => !selectedRowIds.includes(row.id)));
     setSelectedRowIds([]); n
   };
-  
+
   // --- Form Submission ---
 
-  
+
   const handleAddStock = () => {
     console.log("Saving Stock Take:", {
       warehouse: warehouse,
       items: rows,
       notes: notes,
     });
-    
+
     toast.success("Stock take saved successfully!");
   };
 
@@ -139,82 +139,82 @@ export default function StockTake() {
         </div>
 
         {/* --- Custom Editable Table  --- */}
-       <div className="overflow-x-auto w-full md:w-[70%] lg:w-[70%] ">
-<div className="max-h-[300px] overflow-y-auto border rounded-md">
-    <table className="min-w-[700px] border-collapse text-sm text-gray-800 w-full">
+        <div className="overflow-x-auto w-full md:w-[75%] lg:w-[65%] ">
+          <div className="max-h-[300px] overflow-y-auto border rounded-md">
+            <table className="min-w-[700px] border-collapse text-sm text-gray-800 w-full">
 
-            <thead className="bg-secondaryColor text-left">
-              <tr>
-                <th className="border p-2 text-center w-10">
-                  <CustomCheckbox
-                    checked={
-                      rows.length > 0 && selectedRowIds.length === rows.length
-                    }
-                    onChange={handleSelectAll}
-                  />
-                </th>
-                <th className="border p-2 w-12 text-center">S No</th>
-                <th className="border p-2 w-40">Item Code</th>
-                <th className="border p-2">Item Description</th>
-                <th className="border p-2">UoM</th>
-                <th className="border p-2">Previously Available</th>
-                <th className="border p-2 w-50">Currently Available</th>
-              </tr>
-            </thead>
-            
-            {/* Table Body */}
-            <tbody>
-              {rows.map((row, index) => (
-                <tr key={row.id} className="odd:bg-white even:bg-gray-50">
-              
-                  <td className="border p-2 text-center">
+              <thead className="bg-secondaryColor text-left">
+                <tr>
+                  <th className="border p-2 text-center w-10">
                     <CustomCheckbox
-                      checked={selectedRowIds.includes(row.id)} // Check by ID
-                      onChange={() => handleSelectRow(row.id)} // Pass ID
-                    />
-                  </td>
-                  
-                  {/* S No Cell  */}
-                  <td className="border p-2 text-center">{index + 1}</td>
-
-                  {/*  Item Code Cell */}
-                  <td className="border p-0">
-                    <InputField
-                      value={row.itemCode}
-                      onChange={(e) =>
-                        handleRowChange(index, "itemCode", e.target.value)
+                      checked={
+                        rows.length > 0 && selectedRowIds.length === rows.length
                       }
-                      hideLabel
-                      width="w-full"
-                      className="space-y-0" 
+                      onChange={handleSelectAll}
                     />
-                  </td>
-
-                  {/*  Text Cells */}
-                  <td className="border p-2">{row.itemDescription}</td>
-                  <td className="border p-2">{row.uom}</td>
-
-                  {/* "Previously Available" Cell  */}
-                  <td className="border p-2 text-primaryColor font-medium">
-                    {row.previouslyAvailable}
-                  </td>
-
-                  {/* "Currently Available" Cell */}
-                  <td className="border p-0">
-                    <InputField
-                      value={row.currentlyAvailable}
-                      onChange={(e) =>
-                        handleRowChange(index, "currentlyAvailable", e.target.value)
-                      }
-                      hideLabel
-                      width="w-full"
-                      className="space-y-0" 
-                    />
-                  </td>
+                  </th>
+                  <th className="border p-2 w-12 text-center">S No</th>
+                  <th className="border p-2 w-40">Item Code</th>
+                  <th className="border p-2">Item Description</th>
+                  <th className="border p-2">UoM</th>
+                  <th className="border p-2 w-40">Previously Available</th>
+                  <th className="border p-2 w-50">Currently Available</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+
+              {/* Table Body */}
+              <tbody>
+                {rows.map((row, index) => (
+                  <tr key={row.id} className="odd:bg-white even:bg-gray-50">
+
+                    <td className="border p-2 text-center">
+                      <CustomCheckbox
+                        checked={selectedRowIds.includes(row.id)} // Check by ID
+                        onChange={() => handleSelectRow(row.id)} // Pass ID
+                      />
+                    </td>
+
+                    {/* S No Cell  */}
+                    <td className="border p-2 text-center">{index + 1}</td>
+
+                    {/*  Item Code Cell */}
+                    <td className="border p-0">
+                      <InputField
+                        value={row.itemCode}
+                        onChange={(e) =>
+                          handleRowChange(index, "itemCode", e.target.value)
+                        }
+                        hideLabel
+                        width="w-full"
+                        className="space-y-0"
+                      />
+                    </td>
+
+                    {/*  Text Cells */}
+                    <td className="border p-2">{row.itemDescription}</td>
+                    <td className="border p-2">{row.uom}</td>
+
+                    {/* "Previously Available" Cell  */}
+                    <td className="border p-2 text-primaryColor font-medium">
+                      {row.previouslyAvailable}
+                    </td>
+
+                    {/* "Currently Available" Cell */}
+                    <td className="border p-0">
+                      <InputField
+                        value={row.currentlyAvailable}
+                        onChange={(e) =>
+                          handleRowChange(index, "currentlyAvailable", e.target.value)
+                        }
+                        hideLabel
+                        width="w-full"
+                        className="space-y-0"
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
 
           {/* Add/Delete buttons (mimicking DynamicEditableTable) */}
@@ -228,11 +228,10 @@ export default function StockTake() {
             <button
               onClick={handleDeleteRows}
               disabled={selectedRowIds.length === 0}
-              className={`text-sm font-semibold ${
-                selectedRowIds.length > 0
+              className={`text-sm font-semibold ${selectedRowIds.length > 0
                   ? "text-red-500 hover:none"
                   : "text-gray-400 cursor-not-allowed"
-              }`}
+                }`}
             >
               Delete
             </button>

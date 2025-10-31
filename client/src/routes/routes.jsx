@@ -50,14 +50,14 @@ const AppRoutes = () => {
       <Route path="/login" element={<Login />} />
 
       {/* Protected Routes */}
-      {/* <Route
+      <Route
         path="/"
         element={
           <ProtectedRoute>
             <ProtectedLayout />
           </ProtectedRoute>
         }
-      > */}
+      >
         <Route index element={<Dashboard />} />
         <Route path="dashboard" element={<Dashboard />} />
 
@@ -119,7 +119,7 @@ const AppRoutes = () => {
 
         {/* Catch-all for logged-in users */}
         <Route path="*" element={<NotFound />} />
-      {/* </Route> */}
+      </Route>
 
       {/* Catch-all for unauthenticated users */}
       <Route path="*" element={<Login />} />

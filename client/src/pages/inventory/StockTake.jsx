@@ -56,17 +56,24 @@ export default function StockTake() {
   ];
 
   // --- Custom Table Logic ---
-  const handleRowChange = (index, field, value) => {
-    // Create a new array
-    const updatedRows = rows.map((row, i) => {
-      if (i === index) {
+const handleRowChange = (index, field, value) => {
+  const updatedRows = rows.map((row, i) => {
+    if (i === index) {
+      const updatedRow = { ...row, [field]: value };
 
-        return { ...row, [field]: value };
+      if (field === "itemCode" && itemMaster[value]) {
+        updatedRow.itemDescription = itemMaster[value].description;
+        updatedRow.uom = itemMaster[value].uom;
+        updatedRow.previouslyAvailable = itemMaster[value].prev;
       }
-      return row;
-    });
-    setRows(updatedRows);
-  };
+
+      return updatedRow;
+    }
+    return row;
+  });
+
+  setRows(updatedRows);
+};
 
 
   const handleAddRow = () => {
@@ -169,8 +176,8 @@ export default function StockTake() {
 
                     <td className="border p-2 text-center">
                       <CustomCheckbox
-                        checked={selectedRowIds.includes(row.id)} // Check by ID
-                        onChange={() => handleSelectRow(row.id)} // Pass ID
+                        checked={selectedRowIds.includes(row.id)} 
+                        onChange={() => handleSelectRow(row.id)} 
                       />
                     </td>
 
@@ -178,15 +185,18 @@ export default function StockTake() {
                     <td className="border p-2 text-center">{index + 1}</td>
 
                     {/*  Item Code Cell */}
-                    <td className="border p-0">
-                      <InputField
+                    <td className="border p-1">
+                      <DropDown
+                        placeholder="Select Item Code"
+                        options={[
+                          { label: "1.12.12 ", value: "1.12.12" },
+                          { label: "1.12.10 ", value: "1.12.10" },
+                          { label: "1.13.02 ", value: "1.13.02" },
+                          { label: "1.15.01 ", value: "1.15.01" },
+                        ]}
                         value={row.itemCode}
-                        onChange={(e) =>
-                          handleRowChange(index, "itemCode", e.target.value)
-                        }
-                        hideLabel
+                        onChange={(e) => handleRowChange(index, "itemCode", e.target.value)}
                         width="w-full"
-                        className="space-y-0"
                       />
                     </td>
 
@@ -229,8 +239,8 @@ export default function StockTake() {
               onClick={handleDeleteRows}
               disabled={selectedRowIds.length === 0}
               className={`text-sm font-semibold ${selectedRowIds.length > 0
-                  ? "text-red-500 hover:none"
-                  : "text-gray-400 cursor-not-allowed"
+                ? "text-red-500 hover:none"
+                : "text-gray-400 cursor-not-allowed"
                 }`}
             >
               Delete

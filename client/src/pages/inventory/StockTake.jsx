@@ -7,8 +7,8 @@ import Breadcrumb from "../../components/BreadCrumb";
 import DropDown from "../../components/Dropdown";
 import TextareaField from "../../components/TextareaField";
 import ButtonComponent from "../../components/ButtonComponent";
-import InputField from "../../components/InputField"; // For editable cells
-import CustomCheckbox from "../../components/CustomCheckBox"; // For row selection
+import InputField from "../../components/InputField";
+import CustomCheckbox from "../../components/CustomCheckBox"; 
 
 
 export default function StockTake() {
@@ -36,7 +36,7 @@ export default function StockTake() {
     },
   ]);
   
-  // State to track selected row IDs for deletion
+
   const [selectedRowIds, setSelectedRowIds] = useState([]);
 
   // --- Breadcrumb ---
@@ -57,14 +57,12 @@ export default function StockTake() {
 
   // --- Custom Table Logic ---
 
-  /**
-   * Handles changes in the editable input fields of the table.
-   */
+ 
   const handleRowChange = (index, field, value) => {
     // Create a new array
     const updatedRows = rows.map((row, i) => {
       if (i === index) {
-        // Create a new object for the changed row
+      
         return { ...row, [field]: value };
       }
       return row;
@@ -72,9 +70,7 @@ export default function StockTake() {
     setRows(updatedRows);
   };
 
-  /**
-   * Adds a new, empty row to the table.
-   */
+  
   const handleAddRow = () => {
     const newId = rows.length > 0 ? Math.max(...rows.map(r => r.id)) + 1 : 1;
     setRows([
@@ -103,7 +99,7 @@ export default function StockTake() {
     if (selectedRowIds.length === rows.length) {
       setSelectedRowIds([]);
     } else {
-      setSelectedRowIds(rows.map((row) => row.id)); // Store IDs
+      setSelectedRowIds(rows.map((row) => row.id)); 
     }
   };
 
@@ -111,14 +107,13 @@ export default function StockTake() {
   const handleDeleteRows = () => {
     // This filter logic now works because selectedRowIds contains IDs
     setRows(rows.filter((row) => !selectedRowIds.includes(row.id)));
-    setSelectedRowIds([]); // Clear selection
+    setSelectedRowIds([]); n
   };
   
   // --- Form Submission ---
 
   
   const handleAddStock = () => {
-    // Logic to save the stock take data
     console.log("Saving Stock Take:", {
       warehouse: warehouse,
       items: rows,
@@ -181,10 +176,10 @@ export default function StockTake() {
                     />
                   </td>
                   
-                  {/* S No Cell (Non-editable) */}
+                  {/* S No Cell  */}
                   <td className="border p-2 text-center">{index + 1}</td>
 
-                  {/* Editable Item Code Cell */}
+                  {/*  Item Code Cell */}
                   <td className="border p-0">
                     <InputField
                       value={row.itemCode}
@@ -193,20 +188,20 @@ export default function StockTake() {
                       }
                       hideLabel
                       width="w-full"
-                      className="space-y-0" // Removes margin from InputField
+                      className="space-y-0" 
                     />
                   </td>
 
-                  {/* Non-Editable Text Cells */}
+                  {/*  Text Cells */}
                   <td className="border p-2">{row.itemDescription}</td>
                   <td className="border p-2">{row.uom}</td>
 
-                  {/* Styled "Previously Available" Cell (Non-editable) */}
+                  {/* "Previously Available" Cell  */}
                   <td className="border p-2 text-primaryColor font-medium">
                     {row.previouslyAvailable}
                   </td>
 
-                  {/* Editable "Currently Available" Cell */}
+                  {/* "Currently Available" Cell */}
                   <td className="border p-0">
                     <InputField
                       value={row.currentlyAvailable}
@@ -215,7 +210,7 @@ export default function StockTake() {
                       }
                       hideLabel
                       width="w-full"
-                      className="space-y-0" // Removes margin from InputField
+                      className="space-y-0" 
                     />
                   </td>
                 </tr>
@@ -255,7 +250,7 @@ export default function StockTake() {
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             width="w-full md:w-3/4 lg:w-1/2"
-            rows={5} // Makes the textarea taller
+            rows={5}
           />
         </div>
 

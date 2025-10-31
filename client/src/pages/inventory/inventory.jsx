@@ -25,17 +25,11 @@ export default function Inventory() {
     <>
       <Breadcrumb items={items} onBackRoute={handleBackRoute} />
       <div className="p-4">
-        {/* Header section with dropdown and new button */}
+     
         <div className="flex justify-between items-center mb-4">
-          {/* <DropDown
-            label="Select item code"
-            placeholder="Select item code"
-            options={[]} // Add options here if available
-            width="w-60"
-            hideLabel={true}
-          /> */}
+         
           
-          {/* This is the new button you requested */}
+          
           <ButtonComponent
             title="Stock Take"
             onClick={handleStockTake}

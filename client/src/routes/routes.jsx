@@ -41,7 +41,8 @@ import DailyAttendance from "../pages/labour/screens/dailyAttandance.jsx";
 import PettyCash from "../pages/PettyCash/PettyCash.jsx";
 import PettyCashRegister from "../pages/PettyCash/screens/PettyCashRegister.jsx";
 import PettyCashEntry from "../pages/PettyCash/screens/PettyCashEntry.jsx";
-
+import Inventory from "../pages/inventory/inventory.jsx";
+import StockTake from "../pages/inventory/StockTake.jsx";
 const AppRoutes = () => {
   return (
     <Routes>
@@ -49,14 +50,14 @@ const AppRoutes = () => {
       <Route path="/login" element={<Login />} />
 
       {/* Protected Routes */}
-      <Route
+      {/* <Route
         path="/"
         element={
           <ProtectedRoute>
             <ProtectedLayout />
           </ProtectedRoute>
         }
-      >
+      > */}
         <Route index element={<Dashboard />} />
         <Route path="dashboard" element={<Dashboard />} />
 
@@ -106,6 +107,10 @@ const AppRoutes = () => {
         <Route path="petty-cash-register" element={<PettyCashRegister/>}/>
         <Route path="petty-cash-entry" element={<PettyCashEntry/>}/>
 
+        {/* Inventory Routes */}
+        <Route path="inventory" element={<Inventory />} />
+        <Route path="inventory/stock-take" element={<StockTake />} />
+
          {/* Labour Routes */}
         <Route path="labour" element={<Labour />}/>
         <Route path="labour-management-labour-master" element={<LabourManagementLabourMaster />} />
@@ -114,7 +119,7 @@ const AppRoutes = () => {
 
         {/* Catch-all for logged-in users */}
         <Route path="*" element={<NotFound />} />
-      </Route>
+      {/* </Route> */}
 
       {/* Catch-all for unauthenticated users */}
       <Route path="*" element={<Login />} />

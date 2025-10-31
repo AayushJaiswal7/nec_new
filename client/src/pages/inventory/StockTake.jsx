@@ -56,8 +56,6 @@ export default function StockTake() {
   ];
 
   // --- Custom Table Logic ---
-
- 
   const handleRowChange = (index, field, value) => {
     // Create a new array
     const updatedRows = rows.map((row, i) => {
